@@ -1,32 +1,35 @@
-// Block1;
-
 let array1 = [100, 'hello', 4, true, null, '555', 300, 'number', 1000];
 let string = 'Hello world!';
 
 
 function reverse(source) {
-    let newArray1 = [];
+    let newArray = [];
+    let reverseString = '';
+    let errorResult = '';
+
+    if (typeof source === 'string') {
+
+        for (let i = source.length - 1; i >= 0; i--) {
+            reverseString += source[i];
+        }
+    } else if (Array.isArray(source)) {
     
-    for (let i = source.length - 1; i >= 0; i--) {
-        newArray1[newArray1.length] = source[i];
+        for (let i = source.length - 1; i >= 0; i--) {
+            newArray[newArray.length] = source[i];
+        }
+    } else {
+        errorResult = 'it is neither a string nor an array';
     }
 
-    return newArray1;
+    return errorResult || reverseString || newArray;
 }
 
-let result1 = reverse(string);
-console.log(result1);
-
-
-
-// Block2;
-
 let array2 = [100, 'hello', 4, true, null, '555', 300, 'number', 1000];
-// let array2 = [];
 
 function verifyNumbers(source) {
     let newArray2 = [];
-    
+    let numberResalt;
+
     for (let i = 0; i < source.length; i++) {
         numberResalt = Number(source[i]);
         
@@ -37,10 +40,6 @@ function verifyNumbers(source) {
     return newArray2;
 }
 
-let result2 = verifyNumbers(array2);
-console.log(result2);
-
-// Block3;
 
 let array3 = [143, 7, 247, 15, -78, 3, 41, 123];
 
@@ -57,11 +56,6 @@ function getMin(source) {
     return number;
 }
 
-let result3 = getMin(array3);
-console.log(result3);
-
-
-// Block4;
 
 let array4 = [143, 7, 247, 15, -78, 3, 41, 123];
 
@@ -77,11 +71,6 @@ function getAverage(source) {
     return average;
 }
 
-let result4 = getAverage(array4);
-console.log(result4);
-
-
-// Block5;
 
 let array5 = ['hello', 'world', 'Madagascar', 'array'];
 
@@ -97,5 +86,22 @@ function getMaxString(source) {
     return maxLength;
 }
 
-let result5 = getMaxString(array5);
+
+const util = {
+    reversItem: reverse,
+    onlyNumbers: verifyNumbers,
+    minNumber: getMin,
+    averageNumber: getAverage,
+    maxString: getMaxString,
+}
+
+let result1 = util.reversItem(array1);
+let result2 = util.onlyNumbers(array2);
+let result3 = util.minNumber(array3);
+let result4 = util.averageNumber(array4);
+let result5 = util.maxString(array5);
+console.log(result1);
+console.log(result2);
+console.log(result3);
+console.log(result4);
 console.log(result5);
